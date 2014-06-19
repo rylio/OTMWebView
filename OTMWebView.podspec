@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.author             = { "otium" => "otium.dev@gmail.com" }
   s.social_media_url   = "http://twitter.com/otium_"
   s.platform     = :ios, "7.0"
-  s.source       = { :git => "https://github.com/OTMWebView.git", :tag => "0.0.1" }
+  s.source       = { :git => "https://github.com/Otium/OTMWebView.git", :tag => "0.0.1" }
   s.source_files  = "OTMWebView/*.{h,m}"
   s.public_header_files = "OTMWebView/OTMWebView.h"
   s.resource  = "OTMWebView/*.js"
