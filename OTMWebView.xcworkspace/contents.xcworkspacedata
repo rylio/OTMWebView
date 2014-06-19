@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <Group
+      location = "container:"
+      name = "OTMWebView">
+      <FileRef
+         location = "group:OTMWebView/OTMWebView.h">
+      </FileRef>
+      <FileRef
+         location = "group:OTMWebView/OTMWebView.m">
+      </FileRef>
+      <FileRef
+         location = "group:OTMWebView/OTMWebViewProgressTracker.h">
+      </FileRef>
+      <FileRef
+         location = "group:OTMWebView/OTMWebViewProgressTracker.m">
+      </FileRef>
+      <FileRef
+         location = "group:OTMWebView/OTMWebViewURLProtocol.h">
+      </FileRef>
+      <FileRef
+         location = "group:OTMWebView/OTMWebViewURLProtocol.m">
+      </FileRef>
+      <FileRef
+         location = "group:OTMWebView/OTMWebView.js">
+      </FileRef>
+   </Group>
+   <FileRef
+      location = "group:Example/Example.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Example/Pods/Pods.xcodeproj">
+   </FileRef>
+</Workspace>

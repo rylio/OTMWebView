@@ -1,0 +1,14 @@
+PODS:
+  - OTMWebView (0.0.1)
+
+DEPENDENCIES:
+  - OTMWebView (from `../`)
+
+EXTERNAL SOURCES:
+  OTMWebView:
+    :path: ../
+
+SPEC CHECKSUMS:
+  OTMWebView: 50e2708bc82a799c39e47c3c908c9eff8977e7fb
+
+COCOAPODS: 0.33.1
