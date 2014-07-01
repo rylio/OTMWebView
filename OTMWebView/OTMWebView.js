@@ -21,7 +21,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-function triggerRequest(command) {
+function otm_triggerRequest(command) {
 
 	var iframe = document.createElement("IFRAME");
 	iframe.setAttribute("src", "otmwebview://" + command);
@@ -33,7 +33,7 @@ function triggerRequest(command) {
 var target = document.querySelector('head > title');
 var observer = new window.WebKitMutationObserver(function(mutations) {
 	mutations.forEach(function(mutation) {
-		triggerRequest("setDocumentTitle/" + mutation.target.textContent);
+		otm_triggerRequest("setDocumentTitle/" + mutation.target.textContent);
 	});
 });
 observer.observe(target, {
@@ -45,6 +45,6 @@ observer.observe(target, {
 if (document.readyState == "interactive") {
 	document.onreadystatechange = function() {
 
-		triggerRequest("onReadyStateChange/" + document.readyState)
+		otm_triggerRequest("onReadyStateChange/" + document.readyState)
 	}
 }
