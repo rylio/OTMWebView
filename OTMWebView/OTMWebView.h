@@ -24,12 +24,39 @@
 #import <UIKit/UIKit.h>
 #import "OTMWebViewContextMenuItem.h"
 
+/**
+ *  Key for tag name of element.
+ */
 extern NSString *const OTMWebViewElementTagNameKey;
+
+/**
+ *  Key for href attribute of element.
+ */
 extern NSString *const OTMWebViewElementHREFKey;
+
+/**
+ *  Key for src attribute of element.
+ */
 extern NSString *const OTMWebViewElementSRCKey;
+
+/**
+ *  Key for title attribute of element.
+ */
 extern NSString *const OTMWebViewElementTitleKey;
+
+/**
+ *  Key for alt attribute of element.
+ */
 extern NSString *const OTMWebViewElementAltKey;
+
+/**
+ *  Key for id attribute of element.
+ */
 extern NSString *const OTMWebViewElementIDKey;
+
+/**
+ *  Key for document URL of element.
+ */
 extern NSString *const OTMWebViewElementDocumentURL;
 
 /**
