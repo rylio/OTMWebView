@@ -11,6 +11,12 @@
          location = "group:OTMWebView/OTMWebView.m">
       </FileRef>
       <FileRef
+         location = "group:OTMWebView/OTMWebViewContextMenuItem.h">
+      </FileRef>
+      <FileRef
+         location = "group:OTMWebView/OTMWebViewContextMenuItem.m">
+      </FileRef>
+      <FileRef
          location = "group:OTMWebView/OTMWebViewProgressTracker.h">
       </FileRef>
       <FileRef
@@ -24,6 +30,9 @@
       </FileRef>
       <FileRef
          location = "group:OTMWebView/OTMWebView.js">
+      </FileRef>
+      <FileRef
+         location = "group:OTMWebView/OTMWebView+ContextMenu.js">
       </FileRef>
    </Group>
    <FileRef

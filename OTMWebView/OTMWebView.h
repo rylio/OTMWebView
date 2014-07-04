@@ -22,6 +22,15 @@
 // THE SOFTWARE.
 
 #import <UIKit/UIKit.h>
+#import "OTMWebViewContextMenuItem.h"
+
+extern NSString *const OTMWebViewElementTagNameKey;
+extern NSString *const OTMWebViewElementHREFKey;
+extern NSString *const OTMWebViewElementSRCKey;
+extern NSString *const OTMWebViewElementTitleKey;
+extern NSString *const OTMWebViewElementAltKey;
+extern NSString *const OTMWebViewElementIDKey;
+extern NSString *const OTMWebViewElementDocumentURL;
 
 /**
  *  'OTMWebView' is a subclass of the 'UIWebView', adding several additions.
@@ -45,7 +54,31 @@
 /**
  *  The current progress of the web view. Value from 0.0 to 1.0, it is estimated based off of the bytes expected to be loaded.
  */
+
+///------------------------
+/// @name Progress Tracking
+///------------------------
+
 @property (readonly, nonatomic) double progress;
+
+///-------------------
+/// @name Context Menu
+///-------------------
+
+@property (nonatomic) BOOL customContextMenuEnabled;
+
++(NSArray *)defaultContextMenuItemsForElement:(NSDictionary *)element;
+
++(OTMWebViewContextMenuItem *)openContextMenuItem;
+
++(OTMWebViewContextMenuItem *)saveImageContextMenuItem;
+
++(OTMWebViewContextMenuItem *)copyURLContextMenuItem;
+
++(OTMWebViewContextMenuItem *)copyImageContextMenuItem;
+
++(OTMWebViewContextMenuItem *)readingListContextMenuItem;
+
 @end
 
 /**
@@ -62,7 +95,7 @@
  *  @param response The response that the web view received.
  *  @param request  The request that was sent to receive the response.
  */
--(void)webView:(OTMWebView *)webView didRecieveResponse:(NSURLResponse *)response forRequest:(NSURLRequest *)request;
+-(void)webView:(OTMWebView *)webView didReceiveResponse:(NSURLResponse *)response forRequest:(NSURLRequest *)request;
 
 /**
  *  Sent when the document title of the web view has changed, including when a new document has been loaded.
@@ -79,24 +112,32 @@
 /**
  *  Sent when the progress has started for the main frame of the web view.
  *
- *  @param webView the web view whose progress has started.
+ *  @param webView The web view whose progress has started.
  */
 -(void)webViewProgressDidStart:(OTMWebView *)webView;
 
 /**
  *  Sent when the web view's document readyState is completed.
  *
- *  @param webView the web view whose progress is finished
+ *  @param webView The web view whose progress is finished
  */
 -(void)webViewProgressDidFinish:(OTMWebView *)webView;
 
 /**
  *  Sent when the progress of the web view has changed.
  *
- *  @param webView  the web view whose progress has changed.
+ *  @param webView  The web view whose progress has changed.
  *  @param progress The new progress of the web view.
  */
 -(void)webView:(OTMWebView *)webView progressDidChange:(double)progress;
+
+///-------------------
+/// @name Context Menu
+///-------------------
+
+-(void)webView:(OTMWebView *)webView configureContextMenuActionSheet:(UIActionSheet *)actionSheet forElements:(NSArray *)elements;
+
+-(NSArray *)webView:(OTMWebView *)webView contextMenuItemsForElement:(NSDictionary *)element defaultMenuItems:(NSArray *)defaultMenuItems;
 
 @end
 

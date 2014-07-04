@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "7.0"
   s.source       = { :git => "https://github.com/Otium/OTMWebView.git", :tag => "0.0.1" }
   s.source_files  = "OTMWebView/*.{h,m}"
-  s.public_header_files = "OTMWebView/OTMWebView.h"
+  s.public_header_files = "OTMWebView/OTMWebView.h", "OTMWebView/OTMWebViewContextMenuItem.h"
   s.resource  = "OTMWebView/*.js"
   s.frameworks = "UIKit", "Foundation"
   s.requires_arc = true
