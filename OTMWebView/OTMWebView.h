@@ -135,8 +135,24 @@ extern NSString *const OTMWebViewElementDocumentURL;
 /// @name Context Menu
 ///-------------------
 
+/**
+ *  Called right before the context menu action sheet is shown.
+ *
+ *  @param webView     The web view.
+ *  @param actionSheet The action sheet about to be shown containing the context menu items.
+ *  @param elements    The elements that are selected.
+ */
 -(void)webView:(OTMWebView *)webView configureContextMenuActionSheet:(UIActionSheet *)actionSheet forElements:(NSArray *)elements;
 
+/**
+ *  Custom context menu items for the element.
+ *
+ *  @param webView          The web view.
+ *  @param element          The element that is being selected.
+ *  @param defaultMenuItems Default context menu items for the element.
+ *
+ *  @return Return the context menu items to be shown for the element. Return nil for none to be shown.
+ */
 -(NSArray *)webView:(OTMWebView *)webView contextMenuItemsForElement:(NSDictionary *)element defaultMenuItems:(NSArray *)defaultMenuItems;
 
 @end
