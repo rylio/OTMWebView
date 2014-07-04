@@ -23,7 +23,7 @@ webView.userAgent = @"My User Agent String";
 ```objective-c
 #import <OTMWebView/OTMWebView.h>
 
--(void)webView:(OTMWebView *)webView didRecieveResponse:(NSURLResponse *)response forRequest:(NSURLRequest *)request {
+-(void)webView:(OTMWebView *)webView didReceiveResponse:(NSURLResponse *)response forRequest:(NSURLRequest *)request {
 
 	if ([response.MIMEType isEqualToString:@"video/mp4"]) {
 

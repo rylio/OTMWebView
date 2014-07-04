@@ -114,7 +114,7 @@ NSString *const kOTMWebViewURLScheme = @"OTMWebView";
 			
 			[self.progressTracker finishProgress];
 			
-		}else if ([request.URL.host isEqualToString:@"setDocumentTitle"]) {
+		} else if ([request.URL.host isEqualToString:@"setDocumentTitle"]) {
 			
 			self.documentTitle = request.URL.path.lastPathComponent;
 		}
@@ -125,9 +125,12 @@ NSString *const kOTMWebViewURLScheme = @"OTMWebView";
 	NSAssert([request isKindOfClass:[NSMutableURLRequest class]], @"request is not mutable");
 	
 	NSMutableURLRequest *mutableRequest = (NSMutableURLRequest *)request;
+	
 	mutableRequest.URL = OTMWebViewURLByAddingWebViewIdentifier(mutableRequest.URL, (OTMWebView *)webView);
 	mutableRequest.mainDocumentURL = OTMWebViewURLByAddingWebViewIdentifier(mutableRequest.mainDocumentURL, (OTMWebView *)webView);
+	
 	[OTMWebViewURLProtocol setProperty:self forKey:kOTMWebViewURLProtocolHandleRequestkey inRequest:mutableRequest];
+	[OTMWebViewURLProtocol setProperty:self forKey:kOTMWebViewURLProtocolMainRequestKey inRequest:mutableRequest];
 	
 	BOOL shouldLoadRequest = YES;
 	if ([self.delegate respondsToSelector:@selector(webView:shouldStartLoadWithRequest:navigationType:)]) {
@@ -136,6 +139,7 @@ NSString *const kOTMWebViewURLScheme = @"OTMWebView";
 	}
 	
 	BOOL startProgress = YES;
+	
 	if (request.URL.fragment) {
 		
 		NSString *nonFragmentUrl1 = [request.URL.absoluteString substringToIndex:[request.URL.absoluteString rangeOfString:@"#"].location];

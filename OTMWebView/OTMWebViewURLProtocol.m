@@ -27,6 +27,7 @@
 
 NSString *const kOTMWebViewURLProtocolIgnoreRequestKey = @"otm_webview_ignore_request";
 NSString *const kOTMWebViewURLProtocolHandleRequestkey = @"otm_webview_handle_request";
+NSString *const kOTMWebViewURLProtocolMainRequestKey = @"otm_webview_main_request";
 
 @interface OTMWebViewURLProtocol ()<NSURLConnectionDataDelegate>
 @property (weak, nonatomic) OTMWebView *webView;
@@ -139,11 +140,11 @@ NSString *const kOTMWebViewURLProtocolHandleRequestkey = @"otm_webview_handle_re
 
 -(void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
 	
-	if ([self.request.URL isEqual:OTMWebViewURLByRemovingWebViewIdentifier(self.request.mainDocumentURL)]) {
+	if ([[self class]propertyForKey:kOTMWebViewURLProtocolMainRequestKey inRequest:self.request]) {
 		
-		if ([self.webView.delegate respondsToSelector:@selector(webView:didRecieveResponse:forRequest:)]) {
+		if ([self.webView.delegate respondsToSelector:@selector(webView:didReceiveResponse:forRequest:)]) {
 
-			[(id<OTMWebViewDelegate>)self.webView.delegate webView:self.webView didRecieveResponse:response forRequest:self.request];
+			[(id<OTMWebViewDelegate>)self.webView.delegate webView:self.webView didReceiveResponse:response forRequest:self.request];
 		}
 	}
 	[self.client URLProtocol:self didReceiveResponse:response cacheStoragePolicy:NSURLCacheStorageAllowed];
