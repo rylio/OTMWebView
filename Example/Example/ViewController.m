@@ -33,6 +33,7 @@
 	self.webView = [[OTMWebView alloc]initWithFrame:CGRectZero];
 	self.webView.translatesAutoresizingMaskIntoConstraints = NO;
 	self.webView.delegate = self;
+	self.webView.scalesPageToFit = YES;
 	[self.view addSubview:self.webView];
 	
 	self.toolbar = [[UIToolbar alloc]initWithFrame:CGRectZero];
@@ -50,6 +51,8 @@
 								[NSLayoutConstraint constraintWithItem:self.toolbar attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:44.0]
 								]];
 	
+	//NSString *html = @"<HTML><HEAD></HEAD><BODY><IFRAME stylesrc=\"https://www.google.com\">google</IFRAME></BODY></HTML>";
+	//				  [self.webView loadHTMLString:html baseURL:nil];
 	[self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://google.com"]]];
 	
 	
@@ -99,6 +102,7 @@
 	
 	[self.progressView setProgress:progress animated:YES];
 }
+
 /*
 #pragma mark - Navigation
 
