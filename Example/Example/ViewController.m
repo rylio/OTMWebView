@@ -81,7 +81,7 @@
 		
 		[self.webView goBack];
 		
-	}else if (item.tag == 1) {
+	} else if (item.tag == 1) {
 		
 		[self.webView goForward];
 	}
@@ -96,7 +96,6 @@
 	
 	self.progressView.progress = 0.0;
 }
-
 
 -(void)webView:(OTMWebView *)progressTracker progressDidChange:(double)progress {
 	

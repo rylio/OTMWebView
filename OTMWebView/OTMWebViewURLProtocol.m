@@ -189,6 +189,7 @@ static  pthread_rwlock_t trackedWebViewsLock = PTHREAD_RWLOCK_INITIALIZER;
 	
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
+		
 		trackedWebViews = [NSMapTable strongToWeakObjectsMapTable];
 	});
 		
