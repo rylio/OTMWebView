@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
     sub.resource  = "OTMWebView/Core/Resources/*.js"
   end
   s.subspec 'ProgressBar' do |sub|
-    sub.source_files = "OTMwebView/ProgressBar/*.{h,m}"
+    sub.source_files = "OTMWebView/ProgressBar/*.{h,m}"
     sub.public_header_files = "OTMWebView/ProgressBar/OTMWebViewProgressBar.h"
   end
 end
