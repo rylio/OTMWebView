@@ -1,9 +1,9 @@
 PODS:
-  - OTMWebView (0.0.2):
+  - OTMWebView (0.0.3):
     - OTMWebView/Core
     - OTMWebView/ProgressBar
-  - OTMWebView/Core (0.0.2)
-  - OTMWebView/ProgressBar (0.0.2)
+  - OTMWebView/Core (0.0.3)
+  - OTMWebView/ProgressBar (0.0.3)
 
 DEPENDENCIES:
   - OTMWebView (from `../`)
@@ -13,6 +13,6 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  OTMWebView: 4359d8ddf9ba7e52a99a7b4626517f7e3d473924
+  OTMWebView: ef049015ca6b3a8fc9bb51522055572caa8faa51
 
 COCOAPODS: 0.33.1
