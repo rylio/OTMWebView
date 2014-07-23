@@ -175,7 +175,7 @@ NSString *const kOTMWebViewURLScheme = @"OTMWebView";
 	
 	BOOL startProgress = YES;
 	
-	if (request.URL.fragment) {
+	if (request.URL.fragment && navigationType != UIWebViewNavigationTypeReload) {
 		
 		NSString *nonFragmentUrl1 = [request.URL.absoluteString substringToIndex:[request.URL.absoluteString rangeOfString:@"#"].location];
 		
@@ -340,11 +340,19 @@ NSString *const kOTMWebViewURLScheme = @"OTMWebView";
 		CGPoint location = [gestureRecognizer locationInView:self];
 		
 		CGFloat windowWidth = [self stringByEvaluatingJavaScriptFromString:@"window.innerWidth"].floatValue;
+		CGFloat windowHeight = [self stringByEvaluatingJavaScriptFromString:@"window.innerHeight"].floatValue;
 		
-		CGFloat scale = self.frame.size.width / windowWidth;
-		location.x /= scale;
-		location.y /= scale;
+		UIEdgeInsets inset = self.scrollView.contentInset;
 		
+		CGFloat width = CGRectGetWidth(self.frame) - inset.left - inset.right;
+		CGFloat height = CGRectGetHeight(self.frame) - inset.top - inset.bottom;
+		
+		CGFloat widthScale = windowWidth / width;
+		CGFloat heightScale = windowHeight/height;
+		
+		location.x = (location.x - inset.left) * widthScale;
+		location.y = (location.y - inset.top) * heightScale;		
+
 		NSString *jsonString = [self stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"otm_elementsAtPoint(%li, %li)", (long)location.x, (long)location.y]];
 		
 		NSArray *elements = [NSJSONSerialization JSONObjectWithData:[jsonString dataUsingEncoding:NSUTF8StringEncoding] options:0 error:NULL];

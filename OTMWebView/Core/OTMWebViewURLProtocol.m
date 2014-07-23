@@ -147,8 +147,11 @@ NSString *const kOTMWebViewURLProtocolMainRequestKey = @"otm_webview_main_reques
 			[(id<OTMWebViewDelegate>)self.webView.delegate webView:self.webView didReceiveResponse:response forRequest:self.request];
 		}
 	}
+	
 	[self.client URLProtocol:self didReceiveResponse:response cacheStoragePolicy:NSURLCacheStorageAllowed];
+
 	[self.webView.progressTracker incrementProgressForRequest:self.request withResponse:response];
+		
 }
 
 -(void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {

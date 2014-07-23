@@ -8,11 +8,11 @@
 
 #import "ViewController.h"
 #import <OTMWebView/OTMWebView.h>
+#import <OTMWebView/OTMWebViewProgressBar.h>
 
 @interface ViewController ()<OTMWebViewDelegate>
-@property (strong, nonatomic) UIToolbar *toolbar;
 @property (strong, nonatomic) OTMWebView *webView;
-@property (strong, nonatomic) UIProgressView *progressView;
+@property (strong, nonatomic) OTMWebViewProgressBar *progressBar;
 -(void)barButtonItemAction:(UIBarButtonItem *)item;
 @end
 
@@ -36,31 +36,26 @@
 	self.webView.scalesPageToFit = YES;
 	[self.view addSubview:self.webView];
 	
-	self.toolbar = [[UIToolbar alloc]initWithFrame:CGRectZero];
-	self.toolbar.translatesAutoresizingMaskIntoConstraints = NO;
-	[self.view addSubview:self.toolbar];
-	
 	[self.view addConstraints:@[
 								[NSLayoutConstraint constraintWithItem:self.webView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0.0],
 								[NSLayoutConstraint constraintWithItem:self.webView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeRight multiplier:1.0 constant:0.0],
 								[NSLayoutConstraint constraintWithItem:self.webView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.0 constant:0.0],
-								[NSLayoutConstraint constraintWithItem:self.webView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.toolbar attribute:NSLayoutAttributeTop multiplier:1.0 constant:0.0],
-								[NSLayoutConstraint constraintWithItem:self.toolbar attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0.0],
-								[NSLayoutConstraint constraintWithItem:self.toolbar attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeRight multiplier:1.0 constant:0.0],
-								[NSLayoutConstraint constraintWithItem:self.toolbar attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0],
-								[NSLayoutConstraint constraintWithItem:self.toolbar attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:44.0]
+								[NSLayoutConstraint constraintWithItem:self.webView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0],
+
 								]];
 	
-	//NSString *html = @"<HTML><HEAD></HEAD><BODY><IFRAME stylesrc=\"https://www.google.com\">google</IFRAME></BODY></HTML>";
-	//				  [self.webView loadHTMLString:html baseURL:nil];
+
+	
+	UINavigationBar *navBar = self.navigationController.navigationBar;
+	self.progressBar = [[OTMWebViewProgressBar alloc]init];
+	CGFloat progressBarHeight = 3.0;
+	self.progressBar.frame = CGRectMake(0.0, CGRectGetMaxY(navBar.bounds) - progressBarHeight , CGRectGetWidth(navBar.bounds), progressBarHeight);
+	self.progressBar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+	[navBar addSubview:self.progressBar];
+
 	[self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://google.com"]]];
 	
-	
-	
-	self.progressView = [[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleBar];
-	
-	UIBarButtonItem *progressItem = [[UIBarButtonItem alloc]initWithCustomView:self.progressView];
-	
+		
 	UIBarButtonItem *backItem = [[UIBarButtonItem alloc]initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(barButtonItemAction:)];
 	
 	backItem.tag = 0;
@@ -68,11 +63,8 @@
 	UIBarButtonItem *forwardItem = [[UIBarButtonItem alloc]initWithTitle:@"Forward" style:UIBarButtonItemStylePlain target:self action:@selector(barButtonItemAction:)];
 	forwardItem.tag = 1;
 	
-	self.toolbar.items = @[backItem, forwardItem, progressItem];
-	
-	
-	
-    // Do any additional setup after loading the view.
+	self.toolbarItems = @[backItem, forwardItem];
+	self.navigationController.toolbarHidden = NO;
 }
 
 -(void)barButtonItemAction:(UIBarButtonItem *)item {
@@ -93,13 +85,26 @@
 }
 
 -(void)webViewProgressDidStart:(OTMWebView *)webView {
-	
-	self.progressView.progress = 0.0;
+
 }
 
 -(void)webView:(OTMWebView *)progressTracker progressDidChange:(double)progress {
 	
-	[self.progressView setProgress:progress animated:YES];
+	[self.progressBar setProgress:progress animated:YES];
+}
+
+-(void)webViewProgressDidFinish:(OTMWebView *)webView {
+	
+	/*dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+		[self.progressView setProgress:0.0];
+
+	});
+	*/
+}
+
+-(void)webView:(OTMWebView *)webView documentTitleDidChange:(NSString *)title {
+	
+	self.navigationItem.title = title;
 }
 
 /*

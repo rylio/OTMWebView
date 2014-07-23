@@ -4,36 +4,60 @@
    <Group
       location = "container:"
       name = "OTMWebView">
-      <FileRef
-         location = "group:OTMWebView/OTMWebView.h">
-      </FileRef>
-      <FileRef
-         location = "group:OTMWebView/OTMWebView.m">
-      </FileRef>
-      <FileRef
-         location = "group:OTMWebView/OTMWebViewContextMenuItem.h">
-      </FileRef>
-      <FileRef
-         location = "group:OTMWebView/OTMWebViewContextMenuItem.m">
-      </FileRef>
-      <FileRef
-         location = "group:OTMWebView/OTMWebViewProgressTracker.h">
-      </FileRef>
-      <FileRef
-         location = "group:OTMWebView/OTMWebViewProgressTracker.m">
-      </FileRef>
-      <FileRef
-         location = "group:OTMWebView/OTMWebViewURLProtocol.h">
-      </FileRef>
-      <FileRef
-         location = "group:OTMWebView/OTMWebViewURLProtocol.m">
-      </FileRef>
-      <FileRef
-         location = "group:OTMWebView/OTMWebView.js">
-      </FileRef>
-      <FileRef
-         location = "group:OTMWebView/OTMWebView+ContextMenu.js">
-      </FileRef>
+      <Group
+         location = "group:OTMWebView/Core"
+         name = "Core">
+         <Group
+            location = "group:Resources"
+            name = "Resources">
+            <FileRef
+               location = "group:OTMWebView+ContextMenu.js">
+            </FileRef>
+            <FileRef
+               location = "group:OTMWebView.js">
+            </FileRef>
+         </Group>
+         <FileRef
+            location = "group:OTMWebView.h">
+         </FileRef>
+         <FileRef
+            location = "group:OTMWebView.m">
+         </FileRef>
+         <FileRef
+            location = "group:OTMWebViewContextMenuItem.h">
+         </FileRef>
+         <FileRef
+            location = "group:OTMWebViewContextMenuItem.m">
+         </FileRef>
+         <FileRef
+            location = "group:OTMWebViewProgressTracker.h">
+         </FileRef>
+         <FileRef
+            location = "group:OTMWebViewProgressTracker.m">
+         </FileRef>
+         <FileRef
+            location = "group:OTMWebViewURLProtocol.h">
+         </FileRef>
+         <FileRef
+            location = "group:OTMWebViewURLProtocol.m">
+         </FileRef>
+      </Group>
+      <Group
+         location = "group:OTMWebView/ProgressBar"
+         name = "ProgressBar">
+         <FileRef
+            location = "group:OTMWebViewProgressBarLayer.h">
+         </FileRef>
+         <FileRef
+            location = "group:OTMWebViewProgressBarLayer.m">
+         </FileRef>
+         <FileRef
+            location = "group:OTMWebViewProgressBar.h">
+         </FileRef>
+         <FileRef
+            location = "group:OTMWebViewProgressBar.m">
+         </FileRef>
+      </Group>
    </Group>
    <FileRef
       location = "group:Example/Example.xcodeproj">
