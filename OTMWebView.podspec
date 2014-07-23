@@ -1,13 +1,13 @@
 Pod::Spec.new do |s|
   s.name         = "OTMWebView"
-  s.version      = "0.0.2"
+  s.version      = "0.0.3"
   s.summary      = "UIWebView subclass adding the missing features of a UIWebView"
   s.homepage     = "https://github.com/otium/OTMWebView"
   s.license      = { :type => "MIT", :file => "LICENSE" }
   s.author             = { "otium" => "otium.dev@gmail.com" }
   s.social_media_url   = "http://twitter.com/otium_"
   s.platform     = :ios, "7.0"
-  s.source       = { :git => "https://github.com/Otium/OTMWebView.git", :tag => "0.0.2" }
+  s.source       = { :git => "https://github.com/Otium/OTMWebView.git", :tag => "0.0.3" }
   s.frameworks = "UIKit", "Foundation"
   s.requires_arc = true
 
