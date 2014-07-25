@@ -187,12 +187,18 @@ NSString *const kOTMWebViewURLScheme = @"OTMWebView";
 		}
 	}
 	
+	if ([NSURLProtocol propertyForKey:kOTMWebViewURLProtocolRedirectRequestKey inRequest:request]) {
+		
+		startProgress = NO;
+	}
+	
 	if (shouldLoadRequest && startProgress) {
 				
 		if ([mutableRequest.URL isEqual:mutableRequest.mainDocumentURL] || mutableRequest.mainDocumentURL == nil) {
 			[self.progressTracker startProgress];
 		}
 	}
+	
 	return shouldLoadRequest;
 }
 
@@ -241,7 +247,7 @@ NSString *const kOTMWebViewURLScheme = @"OTMWebView";
 	if ([self.delegate respondsToSelector:@selector(webView:didFailLoadWithError:)]) {
 		
 		[self.delegate webView:webView didFailLoadWithError:error];
-	}
+	}	
 }
 
 #pragma mark - Progress Tracker Delegate

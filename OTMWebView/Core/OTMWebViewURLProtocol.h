@@ -28,6 +28,7 @@
 extern NSString *const kOTMWebViewURLProtocolIgnoreRequestKey;
 extern NSString *const kOTMWebViewURLProtocolHandleRequestkey;
 extern NSString *const kOTMWebViewURLProtocolMainRequestKey;
+extern NSString *const kOTMWebViewURLProtocolRedirectRequestKey;
 
 
 NSURL *OTMWebViewURLByAddingWebViewIdentifier(NSURL *url, OTMWebView *webView);

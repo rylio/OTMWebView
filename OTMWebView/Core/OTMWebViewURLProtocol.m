@@ -28,6 +28,7 @@
 NSString *const kOTMWebViewURLProtocolIgnoreRequestKey = @"otm_webview_ignore_request";
 NSString *const kOTMWebViewURLProtocolHandleRequestkey = @"otm_webview_handle_request";
 NSString *const kOTMWebViewURLProtocolMainRequestKey = @"otm_webview_main_request";
+NSString *const kOTMWebViewURLProtocolRedirectRequestKey = @"otm_webview_redirect_request";
 
 @interface OTMWebViewURLProtocol ()<NSURLConnectionDataDelegate>
 @property (weak, nonatomic) OTMWebView *webView;
@@ -125,6 +126,7 @@ NSString *const kOTMWebViewURLProtocolMainRequestKey = @"otm_webview_main_reques
 		[[self class]removePropertyForKey:kOTMWebViewURLProtocolIgnoreRequestKey inRequest:mutableRequest];
 		
 		[[self class]setProperty:self.webView forKey:kOTMWebViewURLProtocolHandleRequestkey inRequest:mutableRequest];
+		[[self class]setProperty:@"" forKey:kOTMWebViewURLProtocolRedirectRequestKey inRequest:mutableRequest];
 		
 		[self.client URLProtocol:self wasRedirectedToRequest:mutableRequest redirectResponse:response];
 		
