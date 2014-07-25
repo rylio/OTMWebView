@@ -101,6 +101,7 @@
 	if (anim == [self.progressBarLayer animationForKey:@"fadeAnimation"]) {
 		
 		if (flag) {
+			
 			self.progress = 0.0;
 		}
 		
