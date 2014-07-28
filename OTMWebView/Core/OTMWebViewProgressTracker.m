@@ -93,15 +93,15 @@ const double kOTMWebViewProgressTrackerInitialProgressValue = 0.1;
 -(void)startProgress {
 	
 	[self.lock lock];
-		
+	
+	[self reset];
+	
 	self.isTrackingProgress = YES;
-		
+	
 	if ([self.delegate respondsToSelector:@selector(progressTrackerProgressDidStart:)]) {
 		
 		[self.delegate progressTrackerProgressDidStart:self];
 	}
-	
-	[self reset];
 	
 	self.progress = kOTMWebViewProgressTrackerInitialProgressValue;
 		
