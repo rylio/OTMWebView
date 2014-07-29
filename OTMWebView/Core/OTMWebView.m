@@ -72,27 +72,18 @@ NSString *const kOTMWebViewURLScheme = @"OTMWebView";
 	
 }
 
-- (id)initWithFrame:(CGRect)frame
-{
+-(id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self initialize];
+    }
+    return self;
+}
+
+-(id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-		
-		static dispatch_once_t onceToken;
-		dispatch_once(&onceToken, ^{
-			
-			[NSURLProtocol registerClass:[OTMWebViewURLProtocol class]];
-		});
-		
-		self.otm_delegate = self;
-		self.progressTracker = [[OTMWebViewProgressTracker alloc]init];
-		self.progressTracker.delegate = self;
-		self.contextMenuGestureRecognizer = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(contextMenuGestureRecognizerAction:)];
-		self.contextMenuGestureRecognizer.minimumPressDuration = 0.25;
-		self.contextMenuGestureRecognizer.delegate = self;
-		[self addGestureRecognizer:self.contextMenuGestureRecognizer];
-		
-		self.customContextMenuEnabled = YES;
-
+        [self initialize];
     }
     return self;
 }
@@ -112,6 +103,24 @@ NSString *const kOTMWebViewURLScheme = @"OTMWebView";
 	});
 	
 	return script;
+}
+
+-(void)initialize {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+
+        [NSURLProtocol registerClass:[OTMWebViewURLProtocol class]];
+    });
+
+    self.otm_delegate = self;
+    self.progressTracker = [[OTMWebViewProgressTracker alloc]init];
+    self.progressTracker.delegate = self;
+    self.contextMenuGestureRecognizer = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(contextMenuGestureRecognizerAction:)];
+    self.contextMenuGestureRecognizer.minimumPressDuration = 0.25;
+    self.contextMenuGestureRecognizer.delegate = self;
+    [self addGestureRecognizer:self.contextMenuGestureRecognizer];
+
+    self.customContextMenuEnabled = YES;
 }
 
 -(void)setDocumentTitle:(NSString *)documentTitle {
