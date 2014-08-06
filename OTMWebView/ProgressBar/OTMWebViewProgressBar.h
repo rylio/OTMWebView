@@ -39,7 +39,7 @@
  *  @param progress          The new progress value. Between 0.0 and 1.0.
  *  @param animationDuration The duration of the animation in seconds.
  */
--(void)setProgress:(double)progress animationDuration:(NSTimeInterval)animationDuration;
+- (void)setProgress:(double)progress animationDuration:(NSTimeInterval)animationDuration;
 
 /**
  *  Set the progress and change whether or not it is animated.
@@ -47,7 +47,7 @@
  *  @param progress The new progress value. Between 0.0 and 1.0.
  *  @param animated YES the progress change should be animated with default animation duration of 0.1 seconds. NO if the change should happen immediatley.
  */
--(void)setProgress:(double)progress animated:(BOOL)animated;
+- (void)setProgress:(double)progress animated:(BOOL)animated;
 
 /**
  *  Tint color of the progress bar. Default is [UIColor blueColor]

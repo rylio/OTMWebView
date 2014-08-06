@@ -32,61 +32,56 @@
 
 - (id)initWithFrame:(CGRect)frame
 {
-    self = [super initWithFrame:frame];
-    if (self) {
-		
+	self = [super initWithFrame:frame];
+	if (self) {
 		self.progressBarLayer = [[OTMWebViewProgressBarLayer alloc]init];
 		[self.layer addSublayer:self.progressBarLayer];
 		self.progress = 0.0;
 		self.fadeOnFinish = YES;
 		self.fadeOnFinishAnimationDuration = 0.75;
 		self.fadeOnFinishDelay = 0.25;
-    }
-    return self;
+	}
+	return self;
 }
 
--(void)layoutSubviews {
-	
+- (void)layoutSubviews
+{
 	self.progressBarLayer.frame = self.bounds;
 }
 
--(void)setProgress:(double)progress {
-	
-
+- (void)setProgress:(double)progress
+{
 	[self setProgress:progress animated:NO];
 }
 
--(double)progress {
-	
+- (double)progress
+{
 	return self.progressBarLayer.progress;
 }
 
--(void)setProgress:(double)progress animated:(BOOL)animated {
-		
-	[self setProgress:progress animationDuration:animated ? 0.1 : 0.0];
+- (void)setProgress:(double)progress animated:(BOOL)animated
+{
+	[self setProgress:progress animationDuration:animated ? 0.1:0.0];
 }
 
--(void)setProgress:(double)progress animationDuration:(NSTimeInterval)animationDuration {
-		
+- (void)setProgress:(double)progress animationDuration:(NSTimeInterval)animationDuration
+{
 	if (animationDuration > 0.0) {
-	
 		CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"progress"];
 		animation.fromValue = @(((OTMWebViewProgressBarLayer *)self.progressBarLayer.presentationLayer).progress);
 		animation.toValue = @(progress);
 		animation.duration = animationDuration;
 		[self.progressBarLayer addAnimation:animation forKey:nil];
-
-	} else {
-		
+	}
+	else {
 		[self.progressBarLayer setNeedsDisplay];
 	}
-	
+
 	self.progressBarLayer.progress = progress;
-	
+
 	[self.progressBarLayer removeAnimationForKey:@"fadeAnimation"];
-	
+
 	if (progress >= 1.0 && self.fadeOnFinish) {
-		
 		CABasicAnimation *fadeAnimation = [CABasicAnimation animationWithKeyPath:@"alpha"];
 		fadeAnimation.duration = self.fadeOnFinishAnimationDuration;
 		fadeAnimation.beginTime = [self.progressBarLayer convertTime:CACurrentMediaTime() fromLayer:nil] + self.fadeOnFinishDelay;
@@ -96,28 +91,25 @@
 	}
 }
 
--(void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
-	
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
+{
 	if (anim == [self.progressBarLayer animationForKey:@"fadeAnimation"]) {
-		
 		if (flag) {
-			
 			self.progress = 0.0;
 		}
-		
+
 		[self.progressBarLayer removeAnimationForKey:@"fadeAnimation"];
 	}
 }
 
--(void)setTintColor:(UIColor *)tintColor {
-	
+- (void)setTintColor:(UIColor *)tintColor
+{
 	self.progressBarLayer.tintColor = tintColor;
 }
 
--(UIColor *)tintColor {
-	
+- (UIColor *)tintColor
+{
 	return self.progressBarLayer.tintColor;
 }
 
 @end
-

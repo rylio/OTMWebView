@@ -20,8 +20,6 @@
 	
 	self.window.rootViewController = [[UINavigationController alloc]initWithRootViewController:[ViewController new]];
 	
-	
-	
     return YES;
 }
 

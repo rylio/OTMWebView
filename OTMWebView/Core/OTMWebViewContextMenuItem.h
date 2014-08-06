@@ -35,7 +35,7 @@
  *
  *  @return Returns the initialized context menu item.
  */
--(instancetype)initWithTitle:(NSString *)title actionHandler:(void (^)(OTMWebView *webView, NSDictionary *element))actionHandler;
+- (instancetype)initWithTitle:(NSString *)title actionHandler:(void (^)(OTMWebView *webView, NSDictionary *element))actionHandler;
 
 /**
  *  Set to return the title for the item, use instead of title property for element-specific title.

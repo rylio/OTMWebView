@@ -34,19 +34,20 @@ const double kOTMWebViewProgressTrackerInitialProgressValue = 0.1;
 @end
 
 @implementation OTMWebViewProgressTrackerItem
--(instancetype)init {
-	
+
+- (instancetype)init
+{
 	self = [super init];
-	
+
 	if (self) {
-		
 		self.estimatedLength = 0;
 		self.bytesReceived = 0;
 		self.isHTML = NO;
 	}
-	
+
 	return self;
 }
+
 @end
 
 @interface OTMWebViewProgressTracker ()
@@ -59,134 +60,131 @@ const double kOTMWebViewProgressTrackerInitialProgressValue = 0.1;
 @end
 
 @implementation OTMWebViewProgressTracker
--(instancetype)init {
-	
+
+- (instancetype)init
+{
 	self = [super init];
-	
+
 	if (self) {
 		self.progressItems = [NSMapTable strongToStrongObjectsMapTable];
 		self.isTrackingProgress = NO;
 		self.lock = [[NSLock alloc]init];
 	}
-	
+
 	return self;
 }
 
--(void)reset {
-	
+- (void)reset
+{
 	[self.progressItems removeAllObjects];
 	self.totalBytesReceived = 0;
 	self.totalBytesToLoad = 0;
 	self.progress = 0.0;
 }
 
--(void)setProgress:(double)progress {
-	
+- (void)setProgress:(double)progress
+{
 	_progress = progress;
-	
+
 	if (self.isTrackingProgress && [self.delegate respondsToSelector:@selector(progressTracker:progressDidChange:)]) {
-		
 		[self.delegate progressTracker:self progressDidChange:_progress];
 	}
 }
 
--(void)startProgress {
-	
+- (void)startProgress
+{
 	[self.lock lock];
-	
+
 	[self reset];
-	
+
 	self.isTrackingProgress = YES;
-	
+
 	if ([self.delegate respondsToSelector:@selector(progressTrackerProgressDidStart:)]) {
-		
 		[self.delegate progressTrackerProgressDidStart:self];
 	}
-	
+
 	self.progress = kOTMWebViewProgressTrackerInitialProgressValue;
-		
+
 	[self.lock unlock];
 }
 
--(void)finishProgress {
-	
+- (void)finishProgress
+{
 	[self.lock lock];
-	
+
 	self.progress = 1.0;
-	
+
 	if (self.isTrackingProgress) {
-		
 		self.isTrackingProgress = NO;
-				
+
 		if ([self.delegate respondsToSelector:@selector(progressTrackerProgressDidFinish:)]) {
-			
 			[self.delegate progressTrackerProgressDidFinish:self];
 		}
 	}
-	
+
 	[self.lock unlock];
 }
 
--(void)progressStartedWithRequest:(NSURLRequest *)request {
-	
+- (void)progressStartedWithRequest:(NSURLRequest *)request
+{
 	[self.lock lock];
-		
+
 	[self.progressItems setObject:[[OTMWebViewProgressTrackerItem alloc]init] forKey:request];
-	
+
 	[self.lock unlock];
 }
 
--(void)progressCompletedWithRequest:(NSURLRequest *)request {
-
+- (void)progressCompletedWithRequest:(NSURLRequest *)request
+{
 	[self.lock lock];
-	
+
 	[self.progressItems removeObjectForKey:request];
-	
+
 	[self.lock unlock];
 }
 
--(void)incrementProgressForRequest:(NSURLRequest *)request withResponse:(NSURLResponse *)response {
-	
+- (void)incrementProgressForRequest:(NSURLRequest *)request withResponse:(NSURLResponse *)response
+{
 	[self.lock lock];
-		
+
 	long long estimatedLength = response.expectedContentLength;
 	if (estimatedLength == NSURLResponseUnknownLength) {
 		estimatedLength = kOTMWebViewProgressTrackerItemDefaultEstimatedLength;
 	}
 	self.totalBytesToLoad += estimatedLength;
 	OTMWebViewProgressTrackerItem *item = [self.progressItems objectForKey:request];
-	
+
 	if ([response.MIMEType isEqualToString:@"text/html"]) {
 		item.isHTML = YES;
 	}
-	
+
 	item.estimatedLength = estimatedLength;
 
 	[self.lock unlock];
 }
 
--(void)incrementProgressForRequest:(NSURLRequest *)request withBytesReceived:(NSUInteger)bytesReceived {
-
+- (void)incrementProgressForRequest:(NSURLRequest *)request withBytesReceived:(NSUInteger)bytesReceived
+{
 	[self.lock lock];
-		
+
 	OTMWebViewProgressTrackerItem *item = [self.progressItems objectForKey:request];
 	self.totalBytesReceived += bytesReceived;
 	if (item.bytesReceived > item.estimatedLength) {
-		self.totalBytesToLoad += item.bytesReceived *2 -item.estimatedLength;
+		self.totalBytesToLoad += item.bytesReceived * 2 - item.estimatedLength;
 		item.estimatedLength = item.bytesReceived * 2;
 	}
-	
+
 	long long bytesLeft = self.totalBytesToLoad - self.totalBytesReceived;
-	
+
 	double ratioOfRemainingBytes = 1.0;
 	if (bytesLeft > 0) {
-		ratioOfRemainingBytes = (double)bytesReceived/(double)bytesLeft;
+		ratioOfRemainingBytes = (double)bytesReceived / (double)bytesLeft;
 	}
 	double maxProgress = item.isHTML ? 0.5 : kOTMWebViewProgressTrackerMaxProgressValue;
 	double increment = (maxProgress - self.progress) * ratioOfRemainingBytes;
-	
+
 	self.progress = MIN(self.progress + increment,  maxProgress);
-	
+
 	self.totalBytesReceived += bytesReceived;
 
 	[self.lock unlock];

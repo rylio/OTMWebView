@@ -94,17 +94,17 @@ extern NSString *const OTMWebViewElementDocumentURL;
 
 @property (nonatomic) BOOL customContextMenuEnabled;
 
-+(NSArray *)defaultContextMenuItemsForElement:(NSDictionary *)element;
++ (NSArray *)defaultContextMenuItemsForElement:(NSDictionary *)element;
 
-+(OTMWebViewContextMenuItem *)openContextMenuItem;
++ (OTMWebViewContextMenuItem *)openContextMenuItem;
 
-+(OTMWebViewContextMenuItem *)saveImageContextMenuItem;
++ (OTMWebViewContextMenuItem *)saveImageContextMenuItem;
 
-+(OTMWebViewContextMenuItem *)copyURLContextMenuItem;
++ (OTMWebViewContextMenuItem *)copyURLContextMenuItem;
 
-+(OTMWebViewContextMenuItem *)copyImageContextMenuItem;
++ (OTMWebViewContextMenuItem *)copyImageContextMenuItem;
 
-+(OTMWebViewContextMenuItem *)readingListContextMenuItem;
++ (OTMWebViewContextMenuItem *)readingListContextMenuItem;
 
 @end
 
@@ -122,7 +122,7 @@ extern NSString *const OTMWebViewElementDocumentURL;
  *  @param response The response that the web view received.
  *  @param request  The request that was sent to receive the response.
  */
--(void)webView:(OTMWebView *)webView didReceiveResponse:(NSURLResponse *)response forRequest:(NSURLRequest *)request;
+- (void)webView:(OTMWebView *)webView didReceiveResponse:(NSURLResponse *)response forRequest:(NSURLRequest *)request;
 
 /**
  *  Sent when the document title of the web view has changed, including when a new document has been loaded.
@@ -130,7 +130,7 @@ extern NSString *const OTMWebViewElementDocumentURL;
  *  @param webView The web view of the document with the title change.
  *  @param title   The new title of the web view.
  */
--(void)webView:(OTMWebView *)webView documentTitleDidChange:(NSString *)title;
+- (void)webView:(OTMWebView *)webView documentTitleDidChange:(NSString *)title;
 
 ///------------------------
 /// @name Progress Tracking
@@ -141,14 +141,14 @@ extern NSString *const OTMWebViewElementDocumentURL;
  *
  *  @param webView The web view whose progress has started.
  */
--(void)webViewProgressDidStart:(OTMWebView *)webView;
+- (void)webViewProgressDidStart:(OTMWebView *)webView;
 
 /**
  *  Sent when the web view's document readyState is completed.
  *
  *  @param webView The web view whose progress is finished
  */
--(void)webViewProgressDidFinish:(OTMWebView *)webView;
+- (void)webViewProgressDidFinish:(OTMWebView *)webView;
 
 /**
  *  Sent when the progress of the web view has changed.
@@ -156,7 +156,7 @@ extern NSString *const OTMWebViewElementDocumentURL;
  *  @param webView  The web view whose progress has changed.
  *  @param progress The new progress of the web view.
  */
--(void)webView:(OTMWebView *)webView progressDidChange:(double)progress;
+- (void)webView:(OTMWebView *)webView progressDidChange:(double)progress;
 
 ///-------------------
 /// @name Context Menu
@@ -169,7 +169,7 @@ extern NSString *const OTMWebViewElementDocumentURL;
  *  @param actionSheet The action sheet about to be shown containing the context menu items.
  *  @param elements    The elements that are selected.
  */
--(void)webView:(OTMWebView *)webView configureContextMenuActionSheet:(UIActionSheet *)actionSheet forElements:(NSArray *)elements;
+- (void)webView:(OTMWebView *)webView configureContextMenuActionSheet:(UIActionSheet *)actionSheet forElements:(NSArray *)elements;
 
 /**
  *  Custom context menu items for the element.
@@ -180,7 +180,6 @@ extern NSString *const OTMWebViewElementDocumentURL;
  *
  *  @return Return the context menu items to be shown for the element. Return nil for none to be shown.
  */
--(NSArray *)webView:(OTMWebView *)webView contextMenuItemsForElement:(NSDictionary *)element defaultMenuItems:(NSArray *)defaultMenuItems;
+- (NSArray *)webView:(OTMWebView *)webView contextMenuItemsForElement:(NSDictionary *)element defaultMenuItems:(NSArray *)defaultMenuItems;
 
 @end
-

@@ -29,16 +29,15 @@
 
 @implementation OTMWebViewContextMenuItem
 
--(instancetype)initWithTitle:(NSString *)title actionHandler:(void (^)(OTMWebView *, NSDictionary *))actionHandler {
-	
+- (instancetype)initWithTitle:(NSString *)title actionHandler:(void (^)(OTMWebView *, NSDictionary *))actionHandler
+{
 	self = [super init];
-	
+
 	if (self) {
-		
 		self.title = title;
 		self.actionHandler = actionHandler;
 	}
-	
+
 	return self;
 }
 

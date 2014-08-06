@@ -27,23 +27,22 @@
 @protocol OTMWebViewProgressTrackerDelegate;
 
 @interface OTMWebViewProgressTracker : NSObject
--(void)startProgress;
--(void)finishProgress;
--(void)progressStartedWithRequest:(NSURLRequest *)request;
--(void)progressCompletedWithRequest:(NSURLRequest *)request;
--(void)incrementProgressForRequest:(NSURLRequest *)request withResponse:(NSURLResponse *)response;
--(void)incrementProgressForRequest:(NSURLRequest *)request withBytesReceived:(NSUInteger)bytesReceived;
--(void)reset;
+- (void)startProgress;
+- (void)finishProgress;
+- (void)progressStartedWithRequest:(NSURLRequest *)request;
+- (void)progressCompletedWithRequest:(NSURLRequest *)request;
+- (void)incrementProgressForRequest:(NSURLRequest *)request withResponse:(NSURLResponse *)response;
+- (void)incrementProgressForRequest:(NSURLRequest *)request withBytesReceived:(NSUInteger)bytesReceived;
+- (void)reset;
 @property (readonly, nonatomic) double progress;
 @property (readonly, nonatomic) BOOL isTrackingProgress;
-@property (weak, nonatomic) id<OTMWebViewProgressTrackerDelegate> delegate;
+@property (weak, nonatomic) id <OTMWebViewProgressTrackerDelegate> delegate;
 @end
 
 @protocol OTMWebViewProgressTrackerDelegate <NSObject>
 @optional;
--(void)progressTrackerProgressDidStart:(OTMWebViewProgressTracker *)tracker;
--(void)progressTrackerProgressDidFinish:(OTMWebViewProgressTracker *)tracker;
--(void)progressTracker:(OTMWebViewProgressTracker *)progressTracker progressDidChange:(double)progress;
+- (void)progressTrackerProgressDidStart:(OTMWebViewProgressTracker *)tracker;
+- (void)progressTrackerProgressDidFinish:(OTMWebViewProgressTracker *)tracker;
+- (void)progressTracker:(OTMWebViewProgressTracker *)progressTracker progressDidChange:(double)progress;
 
 @end
-
