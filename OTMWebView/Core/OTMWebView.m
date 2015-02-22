@@ -58,8 +58,8 @@ NSString *const kOTMWebViewURLScheme = @"OTMWebView";
 
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-	    Method oldMethod = class_getInstanceMethod([self class], @selector(setDelegate:));
-	    Method newMethod = class_getInstanceMethod([self class], @selector(setOtm_delegate:));
+		Method oldMethod = class_getInstanceMethod([self class], @selector(setDelegate:));
+		Method newMethod = class_getInstanceMethod([self class], @selector(setOtm_delegate:));
 
 	    method_exchangeImplementations(oldMethod, newMethod);
 
@@ -120,6 +120,16 @@ NSString *const kOTMWebViewURLScheme = @"OTMWebView";
 	[self addGestureRecognizer:self.contextMenuGestureRecognizer];
 
 	self.customContextMenuEnabled = YES;
+}
+
+-(void)setDelegate:(id<UIWebViewDelegate>)delegate {
+
+	[super setDelegate:delegate];
+}
+
+-(id<UIWebViewDelegate>)delegate {
+
+	return [super delegate];
 }
 
 - (void)setDocumentTitle:(NSString *)documentTitle
