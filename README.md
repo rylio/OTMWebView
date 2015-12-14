@@ -2,6 +2,8 @@
 
 `OTMWebView` is a `UIWebView` subclass that attempts to bring some of missing features of the `UIWebView` to iOS.
 
+OTMWebView is no longer being maintained, most of it's features can be found in WKWebView
+
 ## Features
 - Progress tracking
 - Setting user agent for all requests from the web view
